@@ -12,7 +12,7 @@ std::vector<int> Sort::GenerateRandomNum()
     int randomNum;
     std::vector<int> arr;
 
-    std::cout << "Enter a number to generate random numbers:\n";
+    std::cout << "Enter a seed to generate random numbers:\n";
     std::cin >> randomNum;
 
     std::srand(randomNum);
@@ -22,7 +22,7 @@ std::vector<int> Sort::GenerateRandomNum()
     
     for(int i = 0; i < userChoice; i++)
     {
-        randomNum = rand() % 1000;
+        randomNum = rand() % 10000;
         arr.push_back(randomNum);
     }
 

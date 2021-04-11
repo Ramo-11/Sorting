@@ -8,14 +8,27 @@ int main()
     int sortNum = 0;
     bool keepGoing = true;
 
-    std::vector<int> arr = controller.GenerateRandomNum();
-    std::vector<int> tempArr = arr;
-
     while(keepGoing)
     {
         Menu();
         std::cin >> sortNum;
     
+        if(std::cin.fail() || sortNum < 0 || sortNum > 4)
+        {
+            std::cout << "Invalid Input\n";
+            keepGoing = false;
+            continue;
+        }
+        
+        if(sortNum == 4)
+        {
+            keepGoing = false;
+            continue;
+        }
+
+        std::vector<int> arr = controller.GenerateRandomNum();
+        std::vector<int> tempArr = arr;
+
         std::cout << "\nBefore Sorting";
         controller.PrintArray(tempArr);
         
@@ -27,15 +40,6 @@ int main()
         
         else if(sortNum == 3)
             controller.QuickSort(arr, 0, arr.size() - 1);  
-            
-        else if(sortNum == 4)
-            keepGoing = false;
-            
-        else 
-        {
-            std::cout << "Invalid Input\n";
-            keepGoing = false;
-        }
         
         std::cout << "\n\nAfter Sorting";
         controller.PrintArray(arr);
