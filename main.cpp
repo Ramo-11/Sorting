@@ -1,89 +1,78 @@
 #include "Sort.h"
 #include <iomanip>
+#include <unistd.h>
 
 void Menu();
+void SortAll(Sort controller, std::vector<int> arr, int number);
+
+clock_t start;
+clock_t end;
+double insertionTime;
+double mergeTime;
+double quickTime;
 
 int main()
 {
     Sort controller;
-    int sortNum = 0;
-    bool keepGoing = true;
+    std::vector<int> arr;
 
-    clock_t start;
-    clock_t end;
-    double totalTime;
+    arr = controller.GenerateRandomNum(100);
 
-    while(keepGoing)
-    {
-        Menu();
-        std::cin >> sortNum;
-    
-        if(std::cin.fail() || sortNum < 0 || sortNum > 4)
-        {
-            std::cout << "Invalid Input\n";
-            keepGoing = false;
-            continue;
-        }
-        
-        if(sortNum == 4)
-        {
-            keepGoing = false;
-            continue;
-        }
+    std::cout <<"Before sorting 100 elements:\n";
+    controller.PrintArray(arr);
+    controller.InsertionSort(arr);
 
-        std::vector<int> arr = controller.GenerateRandomNum();
-        std::vector<int> tempArr = arr;
+    std::cout << "\nAfter sorting 100 elements:\n";
+    controller.PrintArray(arr);
 
-        std::cout << "\nBefore Sorting";
-        controller.PrintArray(tempArr);
-        
-        start = clock();
+    arr = controller.GenerateRandomNum(1000);
 
-        if(sortNum == 1)
-        {
-            controller.InsertionSort(arr);
+    std::cout <<"\n\n\nBefore sorting 1000 elements:\n";
+    controller.PrintArray(arr);
+    controller.InsertionSort(arr);
 
-            std::cout << "\n\nAfter Sorting";
-            controller.PrintArray(arr);
+    std::cout << "\nAfter sorting 1000 elements:\n";
+    controller.PrintArray(arr);
 
-            int insertionCC = controller.getInsertionCC();
-            std::cout << "\nCounted steps for Insertion sorting = " << insertionCC << "\n";
-        }
-            
-        else if(sortNum == 2)
-        {
-            controller.MergeSort(arr, 0, arr.size() - 1);
+    arr = controller.GenerateRandomNum(100);
+    SortAll(controller, arr, 100);
+    usleep(2000);
 
-            std::cout << "\n\nAfter Sorting";
-            controller.PrintArray(arr);
+    arr = controller.GenerateRandomNum(1000);
+    SortAll(controller, arr, 1000);
+    usleep(2000);
 
-            int mergeCC = controller.getMergeCC();
-            std::cout << "\nCounted steps for Merge sorting = " << mergeCC << "\n";
-        }
-        
-        else if(sortNum == 3)
-        {
-            controller.QuickSort(arr, 0, arr.size() - 1);  
+    arr = controller.GenerateRandomNum(5000);
+    SortAll(controller, arr, 5000);
+    usleep(2000);
 
-            std::cout << "\n\nAfter Sorting";
-            controller.PrintArray(arr);
-
-            int quickCC = controller.getQuickCC();
-            std::cout << "\nCounted steps for Quick sorting = " << quickCC << "\n";
-        }
-        
-        end = clock();
-
-        totalTime = double(end - start) / double(CLOCKS_PER_SEC);
-        std::cout << "\nTime taken = " << std::fixed << totalTime << std::setprecision(5) << "\n\n";
-    }
-
-    std::cout << "\n";
-    return 0;
+    arr = controller.GenerateRandomNum(10000);
+    SortAll(controller, arr, 10000);
+    usleep(2000);
 }
 
-void Menu()
+void SortAll(Sort controller, std::vector<int> arr, int number)
 {
-    std::cout << "\nPick which method you want to use to sort:\n";
-    std::cout << "1- Insertion Sort\t\t2- Merge Sort\t\t3- Quick Sort\t\t4- Exit:\n";
+    start = clock();
+    controller.InsertionSort(arr);
+    end = clock();
+
+    insertionTime = double(end - start) / double(CLOCKS_PER_SEC);
+
+    start = clock();
+    controller.MergeSort(arr, 0, arr.size() - 1);
+    end = clock();
+
+    mergeTime = double(end - start) / double(CLOCKS_PER_SEC);
+    
+
+    start = clock();
+    controller.QuickSort(arr, 0, arr.size() - 1);
+    end = clock();
+
+    quickTime = double(end - start) / double(CLOCKS_PER_SEC);
+
+    std::cout << "\n\nInsertion Time taken for 100 numbers = " << std::fixed << insertionTime << std::setprecision(5) << "\n";
+    std::cout << "Merge Time taken for 100 numbers = = " << std::fixed << mergeTime << std::setprecision(5) << "\n";
+    std::cout << "Quick Time taken for 100 numbers = = " << std::fixed << quickTime << std::setprecision(5) << "\n";
 }

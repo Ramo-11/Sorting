@@ -18,12 +18,9 @@ class Sort
         void QuickSort(std::vector<int> &arr, int low, int high);
         int Partition(std::vector<int> &arr, int low, int high);
 
-        std::vector<int> GenerateRandomNum();
+        std::vector<int> GenerateRandomNum(int);
         void Swap(int*, int*);
         void PrintArray(std::vector<int> &arr);
-        int getInsertionCC();
-        int getMergeCC();
-        int getQuickCC();
 
     private:
         int insertionCC;

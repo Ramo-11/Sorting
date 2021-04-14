@@ -9,20 +9,11 @@ Sort::Sort()
 Sort::~Sort()
 { }
 
-std::vector<int> Sort::GenerateRandomNum()
+std::vector<int> Sort::GenerateRandomNum(int userChoice)
 {
-    int userChoice;
-    int randomNum;
     std::vector<int> arr;
+    int randomNum;
 
-    std::cout << "Enter a seed to generate random numbers:\n";
-    std::cin >> randomNum;
-
-    std::srand(randomNum);
-
-    std::cout << "\nHow many numbers would you like to be generated?\n";
-    std::cin >> userChoice;
-    
     for(int i = 0; i < userChoice; i++)
     {
         randomNum = rand() % 100000;
@@ -168,19 +159,4 @@ void Sort::PrintArray(std::vector<int> &arr)
         std::cout << arr.at(i) << " ";
     }
     std::cout << "\n";
-}
-
-int Sort::getInsertionCC()
-{
-    return insertionCC;
-}
-
-int Sort::getMergeCC()
-{
-    return mergeCC;
-}
-
-int Sort::getQuickCC()
-{
-    return quickCC;
 }
