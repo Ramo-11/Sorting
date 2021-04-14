@@ -1,4 +1,5 @@
 #include "Sort.h"
+#include <iomanip>
 
 void Menu();
 
@@ -7,6 +8,10 @@ int main()
     Sort controller;
     int sortNum = 0;
     bool keepGoing = true;
+
+    clock_t start;
+    clock_t end;
+    double totalTime;
 
     while(keepGoing)
     {
@@ -32,17 +37,45 @@ int main()
         std::cout << "\nBefore Sorting";
         controller.PrintArray(tempArr);
         
+        start = clock();
+
         if(sortNum == 1)
+        {
             controller.InsertionSort(arr);
+
+            std::cout << "\n\nAfter Sorting";
+            controller.PrintArray(arr);
+
+            int insertionCC = controller.getInsertionCC();
+            std::cout << "\nCounted steps for Insertion sorting = " << insertionCC << "\n";
+        }
             
         else if(sortNum == 2)
+        {
             controller.MergeSort(arr, 0, arr.size() - 1);
+
+            std::cout << "\n\nAfter Sorting";
+            controller.PrintArray(arr);
+
+            int mergeCC = controller.getMergeCC();
+            std::cout << "\nCounted steps for Merge sorting = " << mergeCC << "\n";
+        }
         
         else if(sortNum == 3)
+        {
             controller.QuickSort(arr, 0, arr.size() - 1);  
+
+            std::cout << "\n\nAfter Sorting";
+            controller.PrintArray(arr);
+
+            int quickCC = controller.getQuickCC();
+            std::cout << "\nCounted steps for Quick sorting = " << quickCC << "\n";
+        }
         
-        std::cout << "\n\nAfter Sorting";
-        controller.PrintArray(arr);
+        end = clock();
+
+        totalTime = double(end - start) / double(CLOCKS_PER_SEC);
+        std::cout << "\nTime taken = " << std::fixed << totalTime << std::setprecision(5) << "\n\n";
     }
 
     std::cout << "\n";

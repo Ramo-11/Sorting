@@ -21,5 +21,13 @@ class Sort
         std::vector<int> GenerateRandomNum();
         void Swap(int*, int*);
         void PrintArray(std::vector<int> &arr);
+        int getInsertionCC();
+        int getMergeCC();
+        int getQuickCC();
+
+    private:
+        int insertionCC;
+        int mergeCC;
+        int quickCC;
 };
 #endif
