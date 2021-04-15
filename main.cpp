@@ -1,6 +1,5 @@
 #include "Sort.h"
 #include <iomanip>
-#include <unistd.h>
 
 void Menu();
 void SortAll(Sort controller, std::vector<int> arr, int number);
@@ -36,19 +35,15 @@ int main()
 
     arr = controller.GenerateRandomNum(100);
     SortAll(controller, arr, 100);
-    usleep(2000);
 
     arr = controller.GenerateRandomNum(1000);
     SortAll(controller, arr, 1000);
-    usleep(2000);
 
     arr = controller.GenerateRandomNum(5000);
     SortAll(controller, arr, 5000);
-    usleep(2000);
 
     arr = controller.GenerateRandomNum(10000);
     SortAll(controller, arr, 10000);
-    usleep(2000);
 }
 
 void SortAll(Sort controller, std::vector<int> arr, int number)
@@ -72,7 +67,10 @@ void SortAll(Sort controller, std::vector<int> arr, int number)
 
     quickTime = double(end - start) / double(CLOCKS_PER_SEC);
 
-    std::cout << "\n\nInsertion Time taken for 100 numbers = " << std::fixed << insertionTime << std::setprecision(5) << "\n";
-    std::cout << "Merge Time taken for 100 numbers = = " << std::fixed << mergeTime << std::setprecision(5) << "\n";
-    std::cout << "Quick Time taken for 100 numbers = = " << std::fixed << quickTime << std::setprecision(5) << "\n";
+    std::cout << "\n\nInsertion Time taken for " << number << " numbers = " << std::fixed << insertionTime << std::setprecision(5) << " seconds\n";
+    std::cout << "Insertion steps for " << number << " numbers = " << controller.getInsertionCC() << "\n\n\n";
+    std::cout << "Merge Time taken for " << number << " numbers  = " << std::fixed << mergeTime << std::setprecision(5) << " seconds\n";
+    std::cout << "Merge steps for " << number << " numbers = " << controller.getMergeCC() << "\n\n\n";
+    std::cout << "Quick Time taken for " << number << " numbers  = " << std::fixed << quickTime << std::setprecision(5) << " seconds\n";
+    std::cout << "Quick steps for " << number << " numbers = " << controller.getQuickCC() << "\n";
 }

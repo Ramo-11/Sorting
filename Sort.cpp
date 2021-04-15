@@ -13,7 +13,7 @@ std::vector<int> Sort::GenerateRandomNum(int userChoice)
 {
     std::vector<int> arr;
     int randomNum;
-
+    
     for(int i = 0; i < userChoice; i++)
     {
         randomNum = rand() % 100000;
@@ -159,4 +159,19 @@ void Sort::PrintArray(std::vector<int> &arr)
         std::cout << arr.at(i) << " ";
     }
     std::cout << "\n";
+}
+
+int Sort::getInsertionCC()
+{
+    return insertionCC;
+}
+
+int Sort::getMergeCC()
+{
+    return mergeCC;
+}
+
+int Sort::getQuickCC()
+{
+    return quickCC;
 }
